@@ -20,7 +20,7 @@
 
 /*----これらの関数を変更する必要はありません----*/
 
-std::vector<std::string> names {"Nick", "Lewis", "Nikos"};
+//std::vector<std::string> names {"Nick", "Lewis", "Nikos"};
 
 bool contains(const std::string& name, const std::vector<std::string>& list_of_names) {
     return std::find(list_of_names.begin(), list_of_names.end(), name) != list_of_names.end();
@@ -55,18 +55,18 @@ std::string greeting(const std::string& name, double num) {
 /*----ここにコードを書いてください----*/
 /*----難易度: 富士----*/
 // `my_assert` をここに定義し、以降のテストに使用してください。
-void my_assert(bool condition, const std::string& message) {
-    if (condition == false) {
-        std::cerr << "Assertion failed: " << message << std::endl;
+void my_assert(bool expr, const std::string& msg) {
+    if (expr == false) {
+        std::cerr << "Assertion failed: " << msg << std::endl;
         std::exit(1);
     }
-//    else if (condition == true){
-//        std::cout << "Pass" << std::endl;
-//    }
+    std::cout << "Pass!" << std::endl;
 }
 
 // `contains` 用のテスト `test_contains` を作成してください
 void test_contains() {
+    std::vector<std::string> names {"Nick", "Lewis", "Nikos"};
+
     // Test case 1: Check if name is in the list
     my_assert(contains("Nick", names), "test_contains failed : case1");
     my_assert(contains("Lewis", names), "test_contains failed : case1");
@@ -74,10 +74,12 @@ void test_contains() {
 
     // Test case 2: Check if name is not in the list
     my_assert(!contains("John", names), "test_contains failed : case2");
-
 }
+
 // `get_name` 用のテスト `test_get_name` を作成してください
 void test_get_name(){
+    std::vector<std::string> names {"Nick", "Lewis", "Nikos"};
+
     my_assert(get_name("Nick", names) == "Nick", "test_get_name failed : case1");
     my_assert(get_name("John", names) == "", "test_get_name failed : case1");
 
@@ -86,10 +88,10 @@ void test_get_name(){
 
 // `add_name` 用のテスト `test_add_name` を作成してください
 void test_add_name(){
-    add_name("Alice", names);
-    my_assert(contains("Alice", names), "test_add_name failed : case1");
+    std::vector<std::string> names {"Nick", "Lewis", "Nikos"};
 
-    my_assert(!contains("Sherlock", names), "test_add_name failed : case2");
+    add_name("Alice", names);
+    my_assert(names[names.size()] == "Alice", "test_add_name failed : case1");
 }
 
 // `add_two` 用のテスト `test_add_two` を作成してください
