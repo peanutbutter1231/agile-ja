@@ -60,7 +60,7 @@ void my_assert(bool expr, const std::string& msg) {
         std::cerr << "Assertion failed: " << msg << std::endl;
         std::exit(1);
     }
-    std::cout << "Pass!" << std::endl;
+    return;
 }
 
 // `contains` 用のテスト `test_contains` を作成してください
@@ -74,6 +74,7 @@ void test_contains() {
 
     // Test case 2: Check if name is not in the list
     my_assert(!contains("John", names), "test_contains failed : case2");
+    return;
 }
 
 // `get_name` 用のテスト `test_get_name` を作成してください
@@ -84,20 +85,23 @@ void test_get_name(){
     my_assert(get_name("John", names) == "", "test_get_name failed : case1");
 
     my_assert(get_name("Nick", names) != "", "test_get_name failed : case2");
+    return;
 }
 
 // `add_name` 用のテスト `test_add_name` を作成してください
 void test_add_name(){
-    std::vector<std::string> names {"Nick", "Lewis", "Nikos"};
+    std::vector<std::string> names {"Nick", "Lewis", "Nikos", "John"};
 
     add_name("Alice", names);
-    my_assert(names[names.size()] == "Alice", "test_add_name failed : case1");
+    my_assert(names[(names.size())-1] == "Alice", "test_add_name failed : case1");
+    return;
 }
 
 // `add_two` 用のテスト `test_add_two` を作成してください
 void test_add_two(){
     my_assert(add_two(5) == 7, "test_add_two failed : case1");
     my_assert(add_two(-1) == 1, "test_add_two failed : case1");
+    return;
 }
 
 // `divide_by_two` 用のテスト `test_divide_by_two` を作成してください
@@ -105,11 +109,13 @@ void test_divide_by_two(){
     my_assert(divide_by_two(0) == 0, "test_divide_by_two failed : case1");
     my_assert(divide_by_two(1) == 0.5, "test_divide_by_two failed : case1");
     my_assert(divide_by_two(2) == 1, "test_divide_by_two failed : case1");
+    return;
 }
 
 // `greeting` 用のテスト `test_greeting` を作成してください
 void test_greeting(){
     my_assert(greeting("Haruki", 2.5) == "Hello, Haruki. It is 2.500000 degrees warmer today than yesterday", "test_greeting failed : case1");
+    return;
 }
 
 /*----難易度: キリマンジャロ----*/
@@ -118,19 +124,20 @@ void test_my_assert_false(){
     bool condition = false;
     std::string message = "This assertion should fail";
     my_assert(condition, message);
+    return;
     }
 
 // `my_assert` 用のテスト `test_my_assert_true` を作成し、式がtrueと評価されたときに適切に処理するかどうかをチェックしてください。
 void test_my_assert_true(){
     bool condition = true;
-    std::string message = "This assertion should pass";
-    my_assert(condition, message);
+    my_assert(condition, "Fail");
+    return;
     }
 
 /*----難易度: エベレスト----*/
 // 次の式全体をテストする `test_complex_greeting` を `my_assert` を使用して作成してください。式がエラーになった場合は、エラーの理由がわかるメッセージを `msg` に指定してください。
 void test_complex_greeting(){
-    my_assert(get_name("Frosty the Snowman", {"Oatmeal", "Prancer", "Rudolph", "Andy"}) == "", "test_complex_greeting : test_get_name failed");
+    my_assert(get_name("Frosty the Snowman", {"Oatmeal", "Prancer", "Rudolph", "Andy"}) != "", "test_complex_greeting : test_get_name failed");
     my_assert(add_two(2) == 4, "test_complex_greeting : test_add_two failed");
 }
 
@@ -141,13 +148,11 @@ int main() {
     test_add_name();
     test_divide_by_two();
     test_greeting();
+    test_my_assert_true();
 
-//    test_my_assert_true();
+//test failとなることが期待値のテスト
 //    test_my_assert_false();
-
-    greeting(get_name("Frosty the Snowman", {"Oatmeal", "Prancer", "Rudolph", "Andy"}), divide_by_two(add_two(2)));
-
-    test_complex_greeting();
+//    test_complex_greeting();
 
     std::cout << "All tests passed!" << std::endl;
     return 0;
